@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { json } from 'sequelize/types';
-import Usuario from '../TeleticketBE/usuarioBE';
+import UsuarioBE from '../TeleticketBE/usuarioBE';
 
 class UsuarioDALC{
     constructor()
@@ -9,7 +9,7 @@ class UsuarioDALC{
     }
     getUsuarios = async( req: Request , res: Response ) => {
 
-        const usuarios = await Usuario.findAll();
+        const usuarios = await UsuarioBE.findAll();
     
         res.json({ usuarios });
     }
@@ -17,7 +17,7 @@ class UsuarioDALC{
 
         const { id } = req.params;
     
-        const usuario = await Usuario.findByPk( id );
+        const usuario = await UsuarioBE.findByPk( id );
     
         if( usuario ) 
         {
@@ -38,7 +38,7 @@ class UsuarioDALC{
     
         try {
             
-            const existeEmail = await Usuario.findOne({
+            const existeEmail = await UsuarioBE.findOne({
                 where: {
                     email: body.email
                 }
@@ -51,7 +51,7 @@ class UsuarioDALC{
             }
     
     
-            const usuario = Usuario.build(body);
+            const usuario = UsuarioBE.build(body);
             await usuario.save();
     
             res.json( usuario );
@@ -73,7 +73,7 @@ class UsuarioDALC{
     
         try {
             
-            const usuario = await Usuario.findByPk( id );
+            const usuario = await UsuarioBE.findByPk( id );
             if ( !usuario ) {
                 return res.status(404).json({
                     msg: 'No existe un usuario con el id ' + id
@@ -96,7 +96,7 @@ class UsuarioDALC{
 
         const { id } = req.params;
     
-        const usuario = await Usuario.findByPk( id );
+        const usuario = await UsuarioBE.findByPk( id );
         if ( !usuario ) {
             return res.status(404).json({
                 msg: 'No existe un usuario con el id ' + id
