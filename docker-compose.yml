@@ -1,0 +1,13 @@
+version : "24.0.2"
+services:
+  database:
+    image: mysql:8.0.33
+    restart: always
+    environment: 
+      MYSQL_DATABASE : Teleticket
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3000:3306"
+    expose:
+      - "3306"
+    container_name: teleticket-mysql
